@@ -5,19 +5,31 @@
 
 enum layers {
 	qwerty = 0,
-	qwerty_media,
 	fn,
 	caps_fn
 };
 
 enum custom_keycodes {
-    FN_CAPS = SAFE_RANGE
+    FN_CAPS = SAFE_RANGE,
+    FN_LOCK,
+    FN_F1,
+    FN_F2,
+    FN_F3,
+    FN_F4,
+    FN_F5,
+    FN_F6,
+    FN_F7,
+    FN_F8,
+    FN_F9,
+    FN_F10,
+    FN_F11,
+    FN_F12
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[qwerty] = LAYOUT_tkl(
-	     KC_ESC,            KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12, KC_PSCR, KC_SCRL, KC_PAUS,
+	     KC_ESC,            FN_F1,   FN_F2,   FN_F3,   FN_F4,   FN_F5,   FN_F6,   FN_F7,   FN_F8,   FN_F9,  FN_F10,  FN_F11,  FN_F12, KC_PSCR, KC_SCRL, KC_PAUS,
 	     KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,  KC_EQL, KC_BSPC,  KC_INS, KC_HOME, KC_PGUP,
 	     KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_LBRC, KC_RBRC, KC_BSLS,  KC_DEL,  KC_END, KC_PGDN,
         FN_CAPS,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,           KC_ENT,                           
@@ -25,33 +37,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_LCTL, KC_LGUI, KC_LALT,                             KC_SPC,                            KC_RALT,  MO(fn),  KC_APP, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
 	),
 
-	[qwerty_media] = LAYOUT_tkl(
-		_______,          KC_BRID, KC_BRIU, KC_SLEP, KC_WAKE, KC_MPLY, KC_MSTP, KC_MPRV, KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, KC_EJCT, _______, _______, _______,
-		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,                           
-		_______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                   _______,         
-		_______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______,  _______
-	),
-
 	[fn] = LAYOUT_tkl(
-       TG(qwerty_media),          KC_BRID, KC_BRIU, KC_SLEP, KC_WAKE, KC_MPLY, KC_MSTP, KC_MPRV, KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, KC_EJCT, _______, _______, _______,
-                _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  KC_DEL, _______, _______, _______,
-                _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,                           
-                _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                   KC_PGUP,         
-                _______, _______, _______,                            _______,                            _______, _______, _______, _______, KC_HOME, KC_PGDN,  KC_END 
+        FN_LOCK,            FN_F1,   FN_F2,   FN_F3,   FN_F4,   FN_F5,   FN_F6,   FN_F7,   FN_F8,   FN_F9,  FN_F10,  FN_F11,  FN_F12, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  KC_DEL, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,                           
+        _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                   KC_PGUP,         
+        _______, _______, _______,                            _______,                            _______, _______, _______, _______, KC_HOME, KC_PGDN,  KC_END 
 	),
 
 	[caps_fn] = LAYOUT_tkl(
-	            _______,          _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,    _______, _______,    _______,    _______,     _______,
-                _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,    _______,  KC_DEL,    _______,    _______,     _______,
-                _______, _______,   KC_UP, _______, _______, _______,    _______, _______, _______, _______, _______, _______,    _______, _______,    _______,    _______,     _______,
-                KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,    _______, _______, _______, _______, _______, _______,             _______,                                     
-                _______,          _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,    _______,                        KC_MS_UP,             
-                _______, _______, _______,                            KC_MS_BTN1,                            _______, _______, KC_MS_BTN2, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT 
+	    _______,          _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,    _______, _______,    _______,    _______,     _______,
+        _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,    _______,  KC_DEL,    _______,    _______,     _______,
+        _______, _______,   KC_UP, _______, _______, _______,    _______, _______, _______, _______, _______, _______,    _______, _______,    _______,    _______,     _______,
+        _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,    _______, _______, _______, _______, _______, _______,             _______,                                     
+        _______,          _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,    _______,                        KC_MS_UP,             
+        _______, _______, _______,                            KC_MS_BTN1,                            _______, _______, KC_MS_BTN2, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT 
 	)
 };
+
+static bool fn_invert = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     static uint16_t fn_caps_timer;
@@ -84,13 +89,69 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             }
 
             return false;
+        case FN_LOCK:
+            fn_invert = !fn_invert;
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F1:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_BRID) : tap_code(KC_F1);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F2:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_BRIU) : tap_code(KC_F2);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F3:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_SLEP) : tap_code(KC_F3);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F4:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_WAKE) : tap_code(KC_F4);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F5:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MPLY) : tap_code(KC_F5);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F6:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MSTP) : tap_code(KC_F6);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F7:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MPRV) : tap_code(KC_F7);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F8:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MNXT) : tap_code(KC_F8);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F9:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MUTE) : tap_code(KC_F9);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F10:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_VOLD) : tap_code(KC_F10);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F11:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_VOLU) : tap_code(KC_F11);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
+        case FN_F12:
+            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_EJCT) : tap_code(KC_F12);
+            fn_caps_test_press(record, &fn_caps_other_press);
+            return false;
         default:
-            if (record->event.pressed && IS_LAYER_ON(caps_fn)) {
-                fn_caps_other_press = true;
-            }
+            fn_caps_test_press(record, &fn_caps_other_press);
     }
 
     return true;
+}
+
+void fn_caps_test_press(keyrecord_t* record, bool* result) {
+    if (record->event.pressed && IS_LAYER_ON(caps_fn)) {
+        *result = true;
+    }
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
@@ -100,7 +161,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
     static uint8_t caps_fn_layer_leds[] = {19, 35, 62, 61, 60, 59, 75, 83, 78, 77, 76};
     static uint8_t fn_layer_leds[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 19, 75, 78, 77, 76};
-    static uint8_t qwerty_media_layer_leds[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    static uint8_t fn_invert_leds[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 
     RGB red = hsv_to_rgb((HSV){0, 255, RGB_MATRIX_MAXIMUM_BRIGHTNESS});
     RGB gold = hsv_to_rgb((HSV){36, 255, RGB_MATRIX_MAXIMUM_BRIGHTNESS});
@@ -119,16 +180,17 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(fn_layer_leds[i], purple.r, purple.g, purple.b);
             }
             break;
-        #ifdef INVERT_FN_IS_GOLD
-            case qwerty_media:
-                for (uint8_t i = 0; i < sizeof(qwerty_media_layer_leds); i++) {
-                    rgb_matrix_set_color(qwerty_media_layer_leds[i], gold.r, gold.g, gold.b);
-                }
-                break;
-        #endif
         default:
             break;
     }
+
+    #ifdef INVERT_FN_IS_GOLD
+        if (fn_invert) {
+            for (uint8_t i = 0; i < sizeof(fn_invert_leds); i++) {
+                rgb_matrix_set_color(fn_invert_leds[i], gold.r, gold.g, gold.b);
+            }
+        }
+    #endif
 
     if (host_keyboard_led_state().caps_lock) {
         rgb_matrix_set_color(62, red.r, red.g, red.b);
