@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 
 #define TAP_TIME_FN_CAPS 200
+#define INVERT_FN_IS_GOLD
 
 enum layers {
 	qwerty = 0,
@@ -118,11 +119,13 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 rgb_matrix_set_color(fn_layer_leds[i], purple.r, purple.g, purple.b);
             }
             break;
-        case qwerty_media:
-            for (uint8_t i = 0; i < sizeof(qwerty_media_layer_leds); i++) {
-                rgb_matrix_set_color(qwerty_media_layer_leds[i], gold.r, gold.g, gold.b);
-            }
-            break;
+        #ifdef INVERT_FN_IS_GOLD
+            case qwerty_media:
+                for (uint8_t i = 0; i < sizeof(qwerty_media_layer_leds); i++) {
+                    rgb_matrix_set_color(qwerty_media_layer_leds[i], gold.r, gold.g, gold.b);
+                }
+                break;
+        #endif
         default:
             break;
     }
@@ -139,4 +142,3 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
     return true;
 }
-
