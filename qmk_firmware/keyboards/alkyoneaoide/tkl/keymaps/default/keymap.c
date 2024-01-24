@@ -58,6 +58,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 static bool fn_invert = false;
 
+void fn_caps_test_press(keyrecord_t* record, bool* result);
+
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     static uint16_t fn_caps_timer;
     static bool fn_caps_other_press = false;
@@ -90,59 +92,87 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
             return false;
         case FN_LOCK:
-            fn_invert = !fn_invert;
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                fn_invert = !fn_invert;
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F1:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_BRID) : tap_code(KC_F1);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_BRID) : tap_code(KC_F1);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F2:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_BRIU) : tap_code(KC_F2);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_BRIU) : tap_code(KC_F2);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F3:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_SLEP) : tap_code(KC_F3);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_SLEP) : tap_code(KC_F3);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F4:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_WAKE) : tap_code(KC_F4);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_WAKE) : tap_code(KC_F4);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F5:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MPLY) : tap_code(KC_F5);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MPLY) : tap_code(KC_F5);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F6:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MSTP) : tap_code(KC_F6);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MSTP) : tap_code(KC_F6);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F7:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MPRV) : tap_code(KC_F7);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MPRV) : tap_code(KC_F7);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F8:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MNXT) : tap_code(KC_F8);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MNXT) : tap_code(KC_F8);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F9:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MUTE) : tap_code(KC_F9);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MUTE) : tap_code(KC_F9);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F10:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_VOLD) : tap_code(KC_F10);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_VOLD) : tap_code(KC_F10);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F11:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_VOLU) : tap_code(KC_F11);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_VOLU) : tap_code(KC_F11);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         case FN_F12:
-            (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_EJCT) : tap_code(KC_F12);
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_EJCT) : tap_code(KC_F12);
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
             return false;
         default:
-            fn_caps_test_press(record, &fn_caps_other_press);
+            if (record->event.pressed) {
+                fn_caps_test_press(record, &fn_caps_other_press);
+            }
     }
 
     return true;
@@ -159,7 +189,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // GOLD - toggled transparent layers
     // RED - locked keys
 
-    static uint8_t caps_fn_layer_leds[] = {19, 35, 62, 61, 60, 59, 75, 83, 78, 77, 76};
+    static uint8_t caps_fn_layer_leds[] = {19, 35, 62, 61, 60, 59, 75, 83, 80, 78, 77, 76};
     static uint8_t fn_layer_leds[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 19, 75, 78, 77, 76};
     static uint8_t fn_invert_leds[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
 
