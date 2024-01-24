@@ -58,7 +58,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 static bool fn_invert = false;
 
-void fn_caps_test_press(keyrecord_t* record, bool* result);
+void record_key_pressed(keyrecord_t* record, bool* result);
+void tap_swappable_key(keyrecord_t* record, bool isInverted, int layer, uint16_t baseKeycode, uint16_t invertedKeycode, bool* keyTapped);
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     static uint16_t fn_caps_timer;
@@ -94,94 +95,64 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         case FN_LOCK:
             if (record->event.pressed) {
                 fn_invert = !fn_invert;
-                fn_caps_test_press(record, &fn_caps_other_press);
+                record_key_pressed(record, &fn_caps_other_press);
             }
             return false;
         case FN_F1:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_BRID) : tap_code(KC_F1);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F1, KC_BRID, &fn_caps_other_press);
             return false;
         case FN_F2:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_BRIU) : tap_code(KC_F2);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F2, KC_BRIU, &fn_caps_other_press);
             return false;
         case FN_F3:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_SLEP) : tap_code(KC_F3);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F3, KC_SLEP, &fn_caps_other_press);
             return false;
         case FN_F4:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_WAKE) : tap_code(KC_F4);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F4, KC_WAKE, &fn_caps_other_press);
             return false;
         case FN_F5:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MPLY) : tap_code(KC_F5);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F5, KC_MPLY, &fn_caps_other_press);
             return false;
         case FN_F6:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MSTP) : tap_code(KC_F6);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F6, KC_MSTP, &fn_caps_other_press);
             return false;
         case FN_F7:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MPRV) : tap_code(KC_F7);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F7, KC_MPRV, &fn_caps_other_press);
             return false;
         case FN_F8:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MNXT) : tap_code(KC_F8);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F8, KC_MNXT, &fn_caps_other_press);
             return false;
         case FN_F9:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_MUTE) : tap_code(KC_F9);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F9, KC_MUTE, &fn_caps_other_press);
             return false;
         case FN_F10:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_VOLD) : tap_code(KC_F10);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F10, KC_VOLD, &fn_caps_other_press);
             return false;
         case FN_F11:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_VOLU) : tap_code(KC_F11);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F11, KC_VOLU, &fn_caps_other_press);
             return false;
         case FN_F12:
-            if (record->event.pressed) {
-                (fn_invert != IS_LAYER_ON(fn)) ? tap_code(KC_EJCT) : tap_code(KC_F12);
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            tap_swappable_key(record, fn_invert, fn, KC_F12, KC_EJCT, &fn_caps_other_press);
             return false;
         default:
-            if (record->event.pressed) {
-                fn_caps_test_press(record, &fn_caps_other_press);
-            }
+            record_key_pressed(record, &fn_caps_other_press);
     }
 
     return true;
 }
 
-void fn_caps_test_press(keyrecord_t* record, bool* result) {
+void record_key_pressed(keyrecord_t* record, bool* result) {
     if (record->event.pressed && IS_LAYER_ON(caps_fn)) {
         *result = true;
     }
+}
+
+void tap_swappable_key(keyrecord_t* record, bool isInverted, int layer, uint16_t baseKeycode, uint16_t invertedKeycode, bool* keyTapped) {
+    if (record->event.pressed) {
+        (isInverted != IS_LAYER_ON(layer)) ? tap_code(invertedKeycode) : tap_code(baseKeycode);
+    }
+
+    record_key_pressed(record, keyTapped);
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
